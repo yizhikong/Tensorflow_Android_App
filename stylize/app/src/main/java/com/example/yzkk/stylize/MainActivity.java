@@ -89,8 +89,11 @@ public class MainActivity extends AppCompatActivity {
                 String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
                 String fileName = "stylize" + UUID.randomUUID().toString();
                 try {
-                    // should be ok but fail, I don't know why
+                    // it's okay! as long as you should open the permission in the AVD!
                     File file = new File(dir + fileName + ".jpg");
+                    if (!file.exists())
+                        file.createNewFile();
+                    file.setWritable(Boolean.TRUE);
                     FileOutputStream out = new FileOutputStream(file);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
                     out.flush();
